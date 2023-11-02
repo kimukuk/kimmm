@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자뎅</title>
+    <style>
+        html:lang(ko) body {font-family: "Roboto","Arial","Nanum Gothic","Malgun Gothic","맑은 고딕","Dotum","돋움","Apple SD Gothic Neo","AppleGothic",sans-serif;}
+        html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {margin: 0;padding: 0;}
+        body{background-color: #d7d7c2;overflow-y: scroll;}
+        input[type=text]{background-color: rgba(0, 0, 0, .16); border: none;border-radius: 5px; outline: none; width: 150px; transition:all 0.2s ease-in-out;}
+        input[type=text]:focus{width: 180px !important;color: white; background-color: rgba(0, 0, 0, .75);}
+      
+        header{margin: 0;padding: 0;display: block;}
+
+        #top{display: flex; width: 100%;height: 44px;border-bottom: 1px solid black;margin: 0;padding: 0;z-index: 60 !important;}
+        #section{display: flex;max-width: 1340px; width: 1248px;height: 44px;margin-left: auto;margin-right: auto;padding: 0px;transform: translateX(-30px);}
+
+        #section_1{width: 700px;height: 44px; margin-left: 0;}
+        #items_1{width: 311px;height: 44px;position: absolute;white-space: nowrap;}
+        #item_1{height: 44px; list-style-type: none;}
+        .item{float: left; height: 44px;display: flex; font-size: 12px; color: black;}
+        .item_1_link{display: block; text-decoration: none;text-align: center !important;letter-spacing: -.25px;z-index: 99;align-items: center;padding-top: 13px;color: black;}
+        .item_1_link:hover{color: gray;}
+        .item_1_2{display: flexbox; margin-left: 14px !important;font-weight: bold;}
+        .item_1_2::before{position: absolute;height: 10px;width: 1px; content: "|";left: 183px;color: black !important;}
+        .item_1_2_1::before{position: absolute;height: 10px;width: 1px; content: "|";font-weight: 100; left: 256px;color: black !important;}
+        .drop_1{display: none;position: absolute;padding-top: 6px;padding-bottom: 6px;width: 114px;top: 100%;left: 50%;transform: translateX(10%);margin-top: -4px;border: 1px solid #ddd;background: #fff;z-index: 90;}
+        .drop_2{display: none;position: absolute;padding-top: 6px;padding-bottom: 6px;width: 114px;top: 100%;left: 50%;transform: translateX(60%);margin-top: -4px;border: 1px solid #ddd;background: #fff;z-index: 90;}
+        #mypage:hover .drop_1{display: block;}
+        #favorit:hover .drop_2{display: block;}
+        .drop_1_link{display: block; margin-left: 8px;font-size: 12px;text-decoration: none;color: #2d2d2f;height: 30px;}
+        .drop_1_link:hover{color: rgba(0, 0, 0, .32);}
+        #items_2{height: 44px;list-style-type: none;}
+        .item_2{float: left; height: 44px;display: flex; font-size: 12px; color: #2d2d2f;}
+        .item_2_link{display: block; text-decoration: none;text-align: center !important;letter-spacing: -.25px;z-index: 99;align-items: center;padding-top: 13px; margin-left: 10px;color: black;}
+        .item_2_link::before{position: relative;height: 10px;width: 1px; content: "|";left:-5px;font-weight: 100 !important;color: black !important;}
+        .item_2_1_link::before{position: relative;height: 10px;width: 1px; content: "|";left: -5px;font-weight: 100 !important;color: black !important;}
+        .item_2_link:hover{color: rgba(0, 0, 0, .16);}
+        
+        #section_2{display: flex; width: 400px !important;height: 44px; margin-right: 0;margin-left: auto; white-space: nowrap;float: right !important;overflow: visible}
+        .sns{display: flex; width: 70px;position: relative;margin-left: auto;}
+        .sns_link{margin-top: auto;margin-bottom: auto; padding-top: 6px; width: 30px;height: 24px;background-color: rgba(0, 0, 0, .16);border-radius: 100px;}
+        .sns_link:hover{background-color: #0866ff;}
+        .sns_link_1{margin-left: 5px; margin-top: auto;margin-bottom: auto; padding-top: 7px;width: 30px;height: 23px;background-color: rgba(0, 0, 0, .16);border-radius: 50px;}
+        .sns_link_1:hover{background-image: linear-gradient(to right,#FCAF45,#833AB4);}
+        #serch_bar{white-space: nowrap;width: auto;height: 100%;display: block;}
+        #bar-layout{color: black;background-color:none;width: auto;height: 30px;margin-top: 8px;border-radius: 5px;transition: all 0.5s ease-in-out;}
+        #bt{background: none;border: none;outline: none;}
+        #hot{display: none;z-index: 99;}
+        #serch_bar:hover #hot{display:block}
+        #serch_bar:hover + #z{z-index: -1 !important;}
+        #hot-layout{display: block; width: 100%;height: 205px;background-color: white;padding-top: 10px;z-index: 99 !important;transform: translateY(3px);}
+        .hot-link{width: 100%;height: 30px;}
+        .h-link{display: block; padding-left: 10px;height:30px;padding-top: 10px; font-size: 12px; text-decoration: none;color: rgba(0, 0, 0, .50);}
+        .h-link:hover{color: rgba(0, 0, 0, .32);}
+        #recent{display: block;position: absolute; margin-right: 0px;transform: translateY(7px); transform: translateX(399px);margin-top: 7px;}
+        .recent-view{display: none;position: absolute;width: 50px;}
+        .r-view-layout{position: relative; width: 350px;height: 305px; transform: translateX(-300px); background-color: white;z-index: 99;border: 1 solid black;}
+        .r-view-item{width: 100%;height: auto;padding: 5px;background-color: yellow;}
+        .r-view-link{display: flex;width: 330px;height: 65px;padding: 10px;float: left; text-decoration: none;border-bottom: 1px solid rgba(0, 0, 0, .16);}
+        .r-view-link-info{width: auto;display: block;font-size: 13px;color: black;padding-left: 20px;padding-top: 9px;text-align: left;}
+        .r-view-link-info-txt{color: black;}
+        #recent:hover .recent-view{display: block;}
+        #mid{width: 100%;height: 150px;margin-top: 0px; display: flex;}
+        #category{border-top: 1px solid black;border-bottom: 1px solid black; height: 50px;width: auto;}
+        #c-items{display: flex;width: 1080px;height: 50px;margin-left: auto; margin-right: auto;}
+        #cg-all{display: block; width: 50px;height: 49px;border: 1px solid black; margin: 0;padding: 0;font-size: 1px;background-color: rgba(0, 0, 0, .0);transition: all 0.1s ease-in-out;}
+       
+        #cb-1{ display: block;margin-left: 16px; border-top: 2px solid black;border-bottom: 2px solid black;border-left: 1px solid black;border-right: 1px solid black; height: 0px;width: 18px;transform: translateY(16px);transition: all 0.2s ease-in-out;z-index: 2;}
+        #cg-bt:hover #cb-1{border-top: 2px solid white;border-bottom: 2px solid white;border-left: 1px solid white;border-right: 1px solid white;transform: translateY(29px);}
+       
+        #cb-2{display: block;margin-left: 16px; border: 1px solid black;height: 0px;width: 18px;transform: translateY(20px);transition: padding 0.2s ease-in-out;z-index: 1;}
+        #cg-bt:hover #cb-2{border: 1px solid white;padding-bottom: 7px;transform: translateY(21px);}
+        
+        #cb-3{display: block;margin-left: 16px; border-top: 2px solid black;border-bottom: 2px solid black;border-left: 1px solid black;border-right: 1px solid black;height: 0px;width: 18px;transform: translateY(24px);transition: all 0.2s ease-in-out;z-index: 3;}
+        #cg-bt:hover #cb-3{border-top: 2px solid white;border-bottom: 2px solid white;border-left: 1px solid white;border-right: 1px solid white;transform: translateY(6px) !important;}
+        /*#cg-all:hover #cb-1{}*/
+
+        .c-item{margin-left: 40px;}
+        .c-link-set{display: block;position: relative; width: 100%;height: 100%;text-decoration: none;font-size: 12px;}
+        #c-link-z{color: red}
+        #c-link-z:hover{color: gray;}
+        #c-link-1{color: #0c8a61;}
+        #c-link-1:hover{color: gray;}
+        .c-link{color: black;}
+        .c-link:hover{color: gray;}
+        #z{z-index: 1;} 
+        .mini-category{display: none;position: relative; padding-top: 8px; padding-bottom: 8px;position: relative;height: auto; min-width: 158px;background-color: white;z-index: 70;margin-top: -55px;margin-left: -57px;}
+        .mini-link{display: block; width: 100%;height: auto; font-size: 12px; color: black;text-decoration: none;text-align: left;padding-left: 20px;padding-top: 5px;padding-bottom: 5px;}
+        #outer:hover .mini-category{display: block;}
+        #outer:hover .mini-link:hover{color: gray;}
+        #top:hover .mini-category{display: block;}
+        #top:hover .mini-link:hover{color: gray;}
+        #shirt:hover .mini-category{display: block;}
+        #shirt:hover .mini-link:hover{color: gray;}
+        #pant:hover .mini-category{display: block;}
+        #pant:hover .mini-link:hover{color: gray;}
+        #shoes:hover .mini-category{display: block;}
+        #shoes:hover .mini-link:hover{color: gray;}
+        #acc:hover .mini-category{display: block;}
+        #acc:hover .mini-link:hover{color: gray;}
+        #cg-all-layout{display: none;width: 1148px;height: 550px;background-color: white;margin-top: 0px;overflow-y: scroll;}
+
+        #cg-all-layout::-webkit-scrollbar{background-color: rgba(0, 0, 0, .08);width: 8px;}
+        #cg-all-layout::-webkit-scrollbar-thumb{background-color: gray; border-radius: 5px;width: 8px;}
+
+        #cg-bt{color: rgba(0, 0, 0, .0);transition: all 0.1s ease-in-out; }
+        #cg-bt:hover{background-color: rgba(0, 0, 0, .7);}
+        #cg-bt:hover #cg-all-layout{display: flex;}
+        #cg-all-left{width: 210px !important;height: 885px !important;background-color: rgba(0, 0, 0, .08);padding: 20px;}
+        .cg-all-left-link{width: 100%;line-height: 34px; text-align: left;vertical-align: middle;}
+        .cg-all-left-link:hover{ color: rgba(0, 0, 0, .32);background-color: rgba(0, 0, 0, .16);}
+        .cgll{display: block; color: rgba(0, 0, 0, .7); text-decoration: none;font-size: 12px;}
+        .cgll:hover{color: white;}
+        #cg-all-right{width: 938px !important; height: 100%;background-color: white;}
+        #cg-all-right-items{display: flex; margin: 20px;width: 898px; height: auto;}
+        .cg-all-right-item{display: block; width: 179.6px !important;height: 34px !important; margin-left: 8px;margin-right: 8px;background-color: rgba(0, 0, 0, .08);}
+        .cg-all-right-link{display: block;width: 100%;height: 34px; color: black; text-decoration: none;font-size: 12px;text-align: left;transform: translateY(-4px)}
+        .cg-all-right-item_1{width: 163.6px !important;height: 34px !important; margin-left: 8px;margin-right: 8px;background-color: rgba(0, 0, 0, .08);}
+        .cg-all-right-link:hover{background-color: rgba(0, 0, 0, .08);}
+        /*---------------------------------------------------------------------*/
+    </style>
+</head>
+<body>
+    <header style="height: auto;">
+        <div id="top" style="z-index: 50 !important;">
+            <div id="section" style="z-index: 60 !important;">
+                <div id="section_1">
+                    <div id="items_1">
+                        <ul id="item_1">
+                            <li class="item"><a class="item_1_link" href="#">로그인</a></li>
+                            <li class="item" style="margin-left: 14px;"><a class="item_1_link" href="#">회원가입</a></li>
+                            <li class="item" style="margin-left: 14px;"><a class="item_1_link" href="#">장바구니<div style="display: inline-block;margin-left: 5px;background-color: rgba(0, 0, 0, .32);border-radius: 10px; width: 15px;">0</div></a></li>
+                            <li id="mypage" class="item">
+                                <a class="item_1_link item_1_2"href="#">마이페이지</a>
+                                <div class="drop_1">
+                                    <a class="drop_1_link"style="margin-top: 10px;" href="#">관심상품</a>
+                                    <a class="drop_1_link" href="#">주문조회</a>
+                                    <a class="drop_1_link" href="#">적립금</a>
+                                    <a class="drop_1_link" href="#">예치금</a>
+                                    <a class="drop_1_link" href="#">마이쿠폰</a>
+                                    <a class="drop_1_link" href="#">관심상품</a>
+                                </div>
+                            </li>
+                            <li class="item" id="favorit">
+                                <a class="item_1_link item_1_2_1"href="#" style="margin-left: 14px;font-weight: bold;">커뮤니티</a>
+                                <div class="drop_2">
+                                    <a class="drop_1_link"style="margin-top: 10px;" href="#">관심상품</a>
+                                    <a class="drop_1_link" href="#">공지사항</a>
+                                    <a class="drop_1_link" href="#">이벤트</a>
+                                    <a class="drop_1_link" href="#">문의사항</a>
+                                    <a class="drop_1_link" href="#">Review</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul id="items_2" style="margin-left: 311px;">
+                        <li class="item_2">
+                            <a class="item_2_link" href="#">문의사항</a>
+                            <a class="item_2_link item_2_1_link" href="#">리뷰</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="section_2" style="z-index: 99 !important;">
+                    <div class="sns">
+                        <a href="#" class="sns_link"><img src="f.png" alt="f" width="10px" height="15px" style="margin-left: 10px;margin-top: 2px;"></a>
+                        <a href="#" class="sns_link_1"><img src="instagram.png" alt="i" width="20px" height="20px" style="margin-left: 5px;transform: translateY(-2px);"></a>
+                    </div>
+                    <div id="serch_bar">
+                        <div id="bar-layout">
+                            <form action="" style="float: right;">
+                                <input id="serch" type="text" style="transform:translateY(2px);height: 30px;padding-left: 10px;padding-right: 30px; transform: translateY(-1px);">
+                                <button id="bt" type="submit" style="width: 31px;height: 31px;transform: translateX(-30px);margin-top: -1px; position: absolute;cursor: pointer;"><img src="serch.png" alt="" width="16px" height="16px" style="transform: translateY(1px);"></button>
+                            </form>
+                        </div>
+                        <div id="hot">
+                            <div id="hot-layout" style="z-index: 80 !important;">
+                                <div style="width: 100%;height: 30px;padding-left: 10px;padding-top: 5px; margin-top: 0px;border-bottom: 1px solid rgba(0, 0, 0, .08); font-size: 13px; font-weight: bold;z-index: 100 !important;">#Hot Keyword</div>
+                                <ul style="list-style: none;width: 100%;height: 100%;margin-top: 10px;z-index: 100 !important;z-index: 10 !important;">
+                                    <li class="hot-link"><a href="" class="h-link"># 마일드 체크 수트</a></li>
+                                    <li class="hot-link"><a href="" class="h-link"># 루고 스트라이프 수트</a></li>
+                                    <li class="hot-link"><a href="" class="h-link"># 티제로 수트</a></li>
+                                    <li class="hot-link"><a href="" class="h-link"># 엘에스 드레스 셔츠</a></li>
+                                    <li class="hot-link"><a href="" class="h-link"># 고스 라운드 니트</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recent">
+                        <a href="" id="recent-bt" style="margin-left: 8px;height: 30px;margin-top: 7px;"><img src="clock.png" alt="?" width="20px"height="20px" style="background-color: rgba(0, 0, 0, .16); padding: 5px;border-radius: 5px;"></a>   
+                        <div class="recent-view">
+                            <div class="r-view-layout" style="overflow: hidden;">
+                                <h5 style="display: inline-block; width: 270px;height: 20px; padding-left: 10px;padding-top: 5px;padding-bottom: 5px;">Recent Viewed<div style="display: inline-block;margin-left: 3px;">(1)</div></h5>
+                                <div style="display: inline-block; width: 60px;height: 20px;margin-left: auto;margin-right: 10px; padding-top: 0px;padding-bottom: 10px !important;transform: translateY(7px) !important; transform: translateX(0px);">
+                                    <div style="display: flex; width: 100%;height: 100%;">
+                                        <div style="display: block;width: 20px;margin-left: 5px; margin-right: auto;cursor: pointer;"><img src="arrow-reverse.png" alt="" width="100%" height="100%"></div>
+                                        <div style="display: block;width: 20px;margin-right: 5px; margin-left: auto;cursor: pointer;"><img src="arrow.png" alt="" width="100%" height="100%"></div>
+                                    </div>
+                                </div>
+                                <hr style="border: 1px solid rgba(0, 0, 0, .08);">
+                                <ul class="r-view-items">
+                                    <a href="" class="r-view-link">
+                                        <div style="background-image: url(a라운드\ 캐시라이크\ 가디건.jpg);background-size: 64px;border-radius: 10px; width: 64px;height: 64px;margin-top: -5px;"></div>
+                                        <div class="r-view-link-info">
+                                            <span class="r-view-link-info-txt">라운드 캐시라이크 가디건</span>
+                                            <br>
+                                            <span class="r-view-link-info-txt">39,900원</span>
+                                        </div>
+                                    </a>
+                                    <a href="" class="r-view-link">
+                                        <div style="background-image: url(b미스트\ 버튼\ 니트\ 가디건.jpg);background-size: 64px;border-radius: 10px; width: 64px;height: 64px;margin-top: -5px;"></div>
+                                        <div class="r-view-link-info">
+                                            <span class="r-view-link-info-txt">머스트 버튼 니트</span>
+                                            <br>
+                                            <span class="r-view-link-info-txt">47,900원</span>
+                                        </div>
+                                    </a>
+                                    <a href="" class="r-view-link">
+                                        <div style="background-image: url(c오버핏\ 합포\ 후드\ 집업.jpg);background-size: 64px;border-radius: 10px; width: 64px;height: 64px;margin-top: -5px;"></div>
+                                        <div class="r-view-link-info">
+                                            <span class="r-view-link-info-txt">오버핏 힙포 후드 집업</span>
+                                            <br>
+                                            <span class="r-view-link-info-txt">49,900원</span>
+                                        </div>
+                                    </a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mid" style="z-index: 1 !important;">
+           <a href="#" style="width: 500px; height: 100px;margin-left: auto;margin-right: auto;margin-top: 25px;"><img src="zadins.png" alt="?" width="auto" height="auto"></a>
+        </div>
+        <div id="category" style="z-index: -9 !important;">
+            <div id="c-items" style="width: 1148px;">
+                <ul id="z"  style="list-style: none;display: flex;margin: 0; text-align: center;position: absolute;">
+                    <li id="cg-bt" style="display: block;width: 51px;height: 50px;">
+                        <div id="cg-all">
+                            <span id="cb-1"></span>
+                            <span id="cb-2"></span>
+                            <span id="cb-3"></span>
+                        </div> 
+                        <div id="cg-all-layout">
+                            <div id="cg-all-right">
+                                <ul id="cg-all-right-items">
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="color: red !important;font-weight: bold;   display: inline-block;margin-top: 14px !important;margin-left: 20px;">ZADINS MAID</span></a></li>
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="color: #0c8a61 !important;font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">1+1 SERIES</span></a></li>
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">BEST ITEM</span></a></li>
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">SUIT</span></a></li>
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">OUTER</span></a>
+                                        <div style="padding-top: 10px;width: 179.6;height: auto;">
+                                            <ul style="list-style: none;">
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">점퍼</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">패딩</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">코트</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">자켓</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">집업</span></a>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul id="cg-all-right-items" style="margin-top: 199px;">
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">TOP</span></a>
+                                        <div style="padding-top: 10px;width: 179.6;height: auto;">
+                                            <ul style="list-style: none;">
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">니트</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">긴팔</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">가디건</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">후드.맨투맨</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">반팔</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">나시</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">트레이닝</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">프린팅</span></a>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">KINT</span></a></li>
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">SHIRT</span></a>
+                                        <div style="padding-top: 10px;width: 179.6;height: auto;">
+                                            <ul style="list-style: none;">
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">스트라이프</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">심플/베이직</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">체크/패턴</span></a>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">PANTS</span></a>
+                                        <div style="padding-top: 10px;width: 179.6;height: auto;">
+                                            <ul style="list-style: none;">
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">와이드</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">슬랙스</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">데님</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">면바지</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">조거</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">반바지</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">트레이닝</span></a>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="cg-all-right-item"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">SHOES</span></a>
+                                        <div style="padding-top: 10px;width: 179.6;height: auto;">
+                                            <ul style="list-style: none;">
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">스니커즈</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">로퍼</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">구두</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">첼시/워커</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">샌들/슬리퍼</span></a>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul id="cg-all-right-items" style="margin-top: 301px;">
+                                    <li class="cg-all-right-item_1"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">ACC</span></a>
+                                        <div style="padding-top: 10px;width: 179.6;height: auto;">
+                                            <ul style="list-style: none;">
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">넥타이/헹거칩</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">스카프/머플러</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">팔찌/반지</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">안경/시계</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">가방/장갑</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">나시</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">모자/벨트</span></a>
+                                                <a class="cg-all-right-link" href="#" style="display: block;text-align: left; text-decoration: none;color: rgba(0, 0, 0, .7);font-size: 12px;font-weight: 100; width: 100%;height: 26px;padding-top: 8px;"><span style="margin-left: 20px;">양말/기타</span></a>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="cg-all-right-item_1"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">ONLY</span></a></li>
+                                    <li class="cg-all-right-item_1"><a href="#" class="cg-all-right-link"><span style="font-weight: bold; display: inline-block;margin-top: 14px !important;margin-left: 20px;">50%</span></a></li>
+                                </ul>
+                            </div>
+                            <div id="cg-all-left">
+                                <h3 style="border-bottom: 1px solid rgba(0, 0, 0, .16); color: black;text-align: left;font-size: 13px;padding-bottom: 10px;padding-left: 10px;">커뮤니티</h3>
+                                <ul style="list-style: none;margin-top: 5px;">
+                                    <li class="cg-all-left-link">
+                                        <a href="#" class="cgll"><span style="margin-left: 10px;">공지사항</span></a>
+                                    </li>
+                                    <li class="cg-all-left-link">
+                                        <a href="#" class="cgll"><span style="margin-left: 10px;">이벤트</span></a>
+                                    </li>
+                                    <li class="cg-all-left-link">
+                                        <a href="#" class="cgll"><span style="margin-left: 10px;">문의사항</span></a>
+                                    </li>
+                                    <li class="cg-all-left-link">
+                                        <a href="#" class="cgll"><span style="margin-left: 10px;">RIVIEW</span></a>
+                                    </li>
+                                </ul>
+                                <h3 style="border-bottom: 1px solid rgba(0, 0, 0, .16); color: black;text-align: left;font-size: 13px;padding-bottom: 10px;padding-left: 10px;margin-top: 40px;">커뮤니티</h3>
+                                <ul style="list-style: none;margin-top: 5px;">
+                                    <li class="cg-all-left-link">
+                                        <a href="#" class="cgll"><span style="margin-left: 10px;">회사소개</span></a>
+                                    </li>
+                                    <li class="cg-all-left-link">
+                                        <a href="#" class="cgll"><span style="margin-left: 10px;">이용약관</span></a>
+                                    </li>
+                                    <li class="cg-all-left-link">
+                                        <a href="#" class="cgll"><span style="margin-left: 10px;">개인정보 처리방침</span></a>
+                                    </li>
+                                    <li class="cg-all-left-link">
+                                        <a href="#" class="cgll"><span style="margin-left: 10px;">이용안내</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="c-item" style="width: 87.46px;">
+                        <a id="c-link-z" class="c-link-set" href="#"><span style="display: inline-block; transform: translateY(18px);"><b>ZADINS MAID</b></span></a>
+                    </li>
+                    <li class="c-item" style="width: 64.22px;">
+                        <a id="c-link-1" class="c-link-set" href="#"><span style="display: inline-block; transform: translateY(18px);"><b>1+1 SERIES</b></span></a>
+                    </li>
+                    <li class="c-item" style="width: 60.61px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">BEST ITEM</span></a>
+                    </li>
+                    <li class="c-item" style="width: 28.16px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">SUIT</span></a>
+                    </li>
+                    <li id="outer"  class="c-item" style="width: 40.16px;">
+                        <a id="outer" class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">OUTER</span></a>
+                        <div class="mini-category">
+                            <ul style="list-style: none;">
+                                <li>
+                                    <a href="" class="mini-link">점퍼</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">패딩</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">코트</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">자켓</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">집업</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="top" class="c-item" style=" height: 50px; width: 26.08px;margin-left: 40px;border: none;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">TOP</span></a>
+                        <div class="mini-category" style="left: -30px; transform: translateY(106px);height: 205px;">
+                            <ul style="list-style: none;">
+                                <li>
+                                    <a href="" class="mini-link">니트</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">긴팔</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">가디건</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">후드.맨투맨</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">반팔</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">나시</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">트레이닝</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">추리닝</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="c-item" style="width: 29.34px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">KNIT</span></a>
+                    </li>
+                    <li id="shirt" class="c-item" style="width: 35.78px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">SHIRT</span></a>
+                        <div class="mini-category" style="left: -3px; transform: translateY(54px);height: 77px;">
+                            <ul style="list-style: none;">
+                                <li>
+                                    <a href="" class="mini-link">스트라이프</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">심플/베이직</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">체크/패턴</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="pant" class="c-item" style="width: 39.91px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">PANTS</span></a>
+                        <div class="mini-category" style="left: 1px; transform: translateY(-49px);height: 180px;">
+                            <ul style="list-style: none;">
+                                <li>
+                                    <a href="" class="mini-link">와이드</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">슬랙스</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">데님</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">면바지</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">조거</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">반바지</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">트레이닝</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="shoes" class="c-item" style="width: 40.63px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">SHOES</a>
+                            <div class="mini-category" style="left: 1px; transform: translateY(-24px);height: 155px;">
+                                <ul style="list-style: none;">
+                                    <li>
+                                        <a href="" class="mini-link">스니커즈</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="mini-link">로퍼</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="mini-link">구두</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="mini-link">첼시/워커</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="mini-link">조거</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="mini-link">샌들/슬리퍼</a>
+                                    </li>
+                                </ul>
+                            </div>
+                    </li>
+                    <li id="acc" class="c-item" style="width: 26.64px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block;position: relative; transform: translateY(18px);">ACC</span></a>
+                        <div class="mini-category" style="left: -5px; transform: translateY(-49px);height: 179px;">
+                            <ul style="list-style: none;">
+                                <li>
+                                    <a href="" class="mini-link">넥타이/행거칩</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">스카프/머플러</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">팔찌/반지</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">안경/시계</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">가방/장갑</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">모자/벨트</a>
+                                </li>
+                                <li>
+                                    <a href="" class="mini-link">양말/기타</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="c-item" style="width: 32.08px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">ONLY</span></a>
+                    </li>
+                    <li class="c-item" style="width: 25.53px;">
+                        <a class="c-link-set c-link" href="#"><span style="display: inline-block; transform: translateY(18px);">50%</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main>
+
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
